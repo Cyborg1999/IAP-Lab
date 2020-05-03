@@ -14,7 +14,7 @@ protected function connect(){
 }
 protected function databaseClose(){
  //mysqli_close($this->connect()->pdo);
- $this->pdo= null;
+ $this->pdo = null;
 }
 
 }
