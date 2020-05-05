@@ -1,21 +1,22 @@
 <html>
     <head>
-        <title></title>   
+        <title></title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
     <body>
-        <form method="POST">
+        <form method="POST" class="form-group">
             <table align="center">
                 <tr>
-                    <td><input type = "text" name = "first_name" required placeholder="First Name" /></td>
+                    <td><input type = "text" name = "first_name" required placeholder="First Name" class="form-control"/></td>
                 </tr>
                 <tr>
-                    <td><input type = "text" name = "last_name"  placeholder="Last Name" /></td>
+                    <td><input type = "text" name = "last_name"  placeholder="Last Name" class="form-control"  /></td>
                 </tr>
                 <tr>
-                    <td><input type = "text" name = "city_name" placeholder="City" /></td>
+                    <td><input type = "text" name = "city_name" placeholder="City" class="form-control" /></td>
                 </tr>
                 <tr>
-                    <td><button type="submit" name="btn-save"><strong>SAVE</strong></button> </td>
+                    <td><button type="submit" name="btn-save" class="btn btn-primary"><strong>SAVE</strong></button> </td>
                 </tr>
             </table>
         </form>
