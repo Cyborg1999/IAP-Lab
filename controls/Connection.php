@@ -3,16 +3,25 @@
 class Database{
 private $host = "localhost"; 
 private $user = "root";
-private $pwd = " ";
+private $pwd = "";
 private $dbName ="ics3104";
 
-protected function connect(){
-    $dsn = 'mysql:host='.$this->host .';dbname='.$this->dbName ;
-    $pdo = new PDO($dsn,$this->user,$this->pwd);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
-    return $pdo;
+public function connect(){
+    try
+    {
+        $dsn = 'mysql:host='.$this->host .';dbname='.$this->dbName ;
+        $pdo = new PDO($dsn,$this->user,$this->pwd);
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
+        
+        return $pdo;
+    }
+    catch(PDOException $ex)
+    {
+        die("Error:".$ex);
+    }
+    
 }
-protected function databaseClose(){
+public function databaseClose(){
  //mysqli_close($this->connect()->pdo);
  $this->pdo = null;
 }

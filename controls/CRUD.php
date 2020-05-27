@@ -2,7 +2,7 @@
 
 interface Crud{
     /*This is the template interface   */
-    public function save();
+    public function save($f,$l,$c);
     public function readAll();
     public function readUnique();
     public function search();

@@ -2,7 +2,7 @@
     require_once('Connection.php');
     require_once('CRUD.php');
 
-    class Crud extends Database implements Crud{
+    class User implements Crud{
 
         //Values to be inserted
         private $first_name;
@@ -13,13 +13,13 @@
         //Database Connectors
         private $pdo;
         private $connect;
-
-        function __construct()
-        {
-            $this->pdo = new Database;
-            $this->connect = $this->pdo->connect();
-            return $this->connect;
-        }
+    
+        // function __construct()
+        // {
+        //     $this->pdo = new Database;
+        //     $this->connect = $this->pdo->connect();
+        //     return $this->connect;
+        // }
 
         public function getUserData($first_name,$lastname,$usercity){
             $this->first_name = $first_name;
@@ -27,16 +27,23 @@
             $this->usercity = $usercity;
         }
 
-        public function save()
+        public function save($f,$l,$c)
         {
-            $sql = "INSERT INTO user(first_name,lastname,city)VALUES(first_name,lastname,city)";
-            $stmt = $this->connect()->prepare($sql);
-            $stmt->execute([
-                'first_name'=>$this->first_name,
-                'lastname'=>$this->lastname,
-                'usercity'=>$this->usercity
-            ]);
-            return $stmt;             
+            try
+            {
+                $f= $this->first_name;
+                $l= $this->lastname;
+                $c= $this->usercity;
+                $sql = "INSERT INTO `user`(`first_name`, `last_name`, `city`) VALUES ('$f','$l','$c')";
+                $this->pdo = new Database;
+                $this->connect = $this->pdo->connect();
+                $this->connect->exec($sql);
+                echo "User added successfully";
+            }
+            catch(PDOException $ex)
+            {
+                echo "Error:".$ex->getMessage();
+            }    
         }
     
         public function readAll(){

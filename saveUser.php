@@ -1,17 +1,26 @@
 <?php
 
-    require_once('controls/Crud_class');
+    require_once('controls/CRUD_class.php');
+    include_once('controls/Connection.php');
 
-     $crudobj = new Crud;
-
+    $user = new User;
+    
     if(isset($_POST['save']))
     {
         $first_name = $_POST['first_name'];
         $lastname = $_POST['lastname'];
-        $usercity=$_POST['usercity'];
+        $usercity=$_POST['user_city'];
 
-        $crudobj->getUserData($first_name,$lastname,$usercity);
-        $crudobj->save();
+        $user->getUserData($first_name,$lastname,$usercity);
+        
+        if($user->save($first_name,$lastname,$usercity))
+        {
+            echo "User added Successfully";
+        }
+        else
+        {
+            die("Error");
+        }
     }
 
 ?>
