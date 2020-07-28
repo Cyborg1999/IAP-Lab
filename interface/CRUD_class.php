@@ -29,6 +29,7 @@
             $this->first_name = $first_name;
             $this->lastname = $lastname;
             $this->usercity = $usercity;
+
         }
         /* 
         PHP does not allow multiple constructors, so lets fake one.
@@ -41,10 +42,15 @@
         **    Static constructor
         */
         public static function create(){
-            $instance = new self();
+            /*$instance = new self();
             return $instance;
+            */
+        }   
+ /*        function __construct()
+        {
+            
         }
-
+ */
         public function setUsername($username){
             $this->username = $username;
         }
@@ -56,6 +62,12 @@
         public function setPassword($password){
             $this->password = $password;
         }
+        public function getPassword(){
+            return $this->password;
+        }
+        public function setUserId($user_id){
+            $this->user_id = $user_id;
+        }
 
 
 
@@ -63,10 +75,13 @@
         {
             try
             {
-                $f= $this->first_name;
-                $l= $this->lastname;
-                $c= $this->usercity;
-                $sql = "INSERT INTO `user`(`first_name`, `last_name`, `city`) VALUES ('$f','$l','$c')";
+                $f = $this->first_name;
+                $l = $this->lastname;
+                $c = $this->usercity;
+                $u = $this->username;
+                $this->hashPassword();
+                $p = $this->password;
+                $sql = "INSERT INTO `user`(`first_name`, `last_name`, `city`,'user_name','password') VALUES ('$f','$l','$c','$u','$p')";
                 $this->pdo = new Database;
                 $this->connect = $this->pdo->connect();
                 $this->connect->exec($sql);
@@ -141,6 +156,39 @@
             session_start();
             $_SESSION['form_errors'] = "All fields are required";
         }  
+
+        public function hashPassword()
+        {
+            $this->password =password_hash($this->password,PASSWORD_DEFAULT);
+        }
+        
+        public function isPasswordCorrect()
+        {
+            $con =new Database;
+            $found =  false;
+            $sql ="SELECT * FROM user"; 
+
+         /*    while($row = mysql_fetch_array_array($sql)){
+                if(password_verify($this->getPa))
+            } */
+        }
+
+        public function login()
+        {
+            if($this->isPasswordCorrect()){
+                header("Location:private_page.php");
+            }
+        }
+
+        public function createUserSession(){
+            
+        }
+        
+        public function logout()
+        {
+            
+        }
+
     
     }
 

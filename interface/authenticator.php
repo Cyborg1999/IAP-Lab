@@ -5,5 +5,5 @@
         public function isPasswordCorrect();
         public function login();
         public function logout();
-        public function creatFormErrorSessions();
+        //public function createFormErrorSessions();
     }
